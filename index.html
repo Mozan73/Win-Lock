@@ -132,14 +132,96 @@
 
             /* تقليل سرعة تحريك الخلفية على الهواتف */
             body {
-                animation: moveBackground 60s linear infinite; /* سرعة أبطأ */
+                animation: moveBackground 80s linear infinite; /* سرعة أبطأ */
             }
 
             @keyframes moveBackground {
                 0% { background-position: 0% 0%; }
-                50% { background-position: 30% 30%; } /* تقليل المسافة أكثر */
+                50% { background-position: 20% 20%; } /* تقليل المسافة أكثر */
                 100% { background-position: 0% 0%; }
             }
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-end;
+            z-index: 1000;
+        }
+
+        .navbar button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* مسافة بين العلم والنص */
+        }
+
+        .navbar button:hover {
+            color: #00BFFF;
+        }
+
+        /* Language dropdown styling */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 10px; /* حواف مستديرة */
+            overflow: hidden; /* لإخفاء المحتوى الزائد */
+        }
+
+        .language-dropdown-content button {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* مسافة بين العلم والنص */
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown-content button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+
+        /* تحسين شكل زر اللغة */
+        .language-dropdown button {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 8px 16px;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown button:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
     </style>
     <!-- روابط خطوط عربية من Google Fonts -->
@@ -157,6 +239,7 @@
                 <button onclick="changeLanguage('br')">🇧🇷 Português</button>
                 <button onclick="changeLanguage('fr')">🇫🇷 Français</button>
                 <button onclick="changeLanguage('nl')">🇳🇱 Nederlands</button>
+                <button onclick="changeLanguage('de')">🇩🇪 Deutsch</button> <!-- اللغة الألمانية -->
             </div>
         </div>
     </div>
@@ -216,6 +299,10 @@
                 title.innerText = "Win Lock";
                 description.innerText = "WIN LOCK is de beste Arabische server voor de Blue Lock Rivals-kaart, we maken kampioenen en competities, je kunt je team maken en veel vrienden maken daar, doe mee";
                 joinButton.innerText = "Doe mee";
+            } else if (lang === 'de') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK ist der beste arabische Server für die Blue Lock Rivals-Karte, wir machen Champions und Ligen, Sie können Ihr Team erstellen und viele Freunde finden, treten Sie uns bei";
+                joinButton.innerText = "Treten Sie uns bei";
             }
         }
     </script>
