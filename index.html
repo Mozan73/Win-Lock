@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win Lock</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling with moving background effect */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://i.pinimg.com/736x/42/b6/14/42b614691ce578ab427e3c12e692713b.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Tajawal', sans-serif; /* خط عربي فخم */
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        /* Container for content */
+        .container {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+            max-width: 90%; /* Responsive width */
+            backdrop-filter: blur(10px); /* تأثير ضبابي فخم */
+        }
+
+        /* Title styling */
+        h1 {
+            font-size: 3.5rem; /* حجم كبير للعنوان */
+            margin-bottom: 20px;
+            animation: slideDown 1.5s ease-in-out;
+            font-family: 'Cairo', sans-serif; /* خط عربي أنيق */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* ظل للنص */
+            position: relative;
+        }
+
+        /* تأثير إضاءة على العنوان */
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #007BFF, #00BFFF);
+            animation: glow 2s infinite alternate;
+        }
+
+        /* Button styling */
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background: linear-gradient(45deg, #007BFF, #00BFFF); /* جرادينت أزرق */
+            border: none;
+            border-radius: 50px; /* حواف دائرية */
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: pulse 2s infinite;
+            font-family: 'Tajawal', sans-serif; /* خط عربي */
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4); /* ظل للزر */
+            margin: 10px; /* مسافة بين الأزرار */
+        }
+
+        /* Button hover effect */
+        button:hover {
+            transform: scale(1.1); /* تكبير الزر */
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6); /* ظل أكبر */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Moving background animation */
+        @keyframes moveBackground {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Glow effect for the title */
+        @keyframes glow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Responsive design for smaller devices */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem; /* حجم أصغر للعنوان على الموبايل */
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-end;
+            z-index: 1000;
+        }
+
+        .navbar button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* مسافة بين العلم والنص */
+        }
+
+        .navbar button:hover {
+            color: #00BFFF;
+        }
+
+        /* Language dropdown styling */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 10px; /* حواف مستديرة */
+            overflow: hidden; /* لإخفاء المحتوى الزائد */
+        }
+
+        .language-dropdown-content button {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* مسافة بين العلم والنص */
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown-content button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+
+        /* تحسين شكل زر اللغة */
+        .language-dropdown button {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 8px 16px;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+    <!-- روابط خطوط عربية من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <div class="language-dropdown">
+            <button onclick="toggleLanguageDropdown()">🌐 اللغة</button>
+            <div class="language-dropdown-content" id="languageDropdown">
+                <button onclick="changeLanguage('en')">🇺🇸 English</button>
+                <button onclick="changeLanguage('ar')">🇸🇦 العربية</button>
+                <button onclick="changeLanguage('tr')">🇹🇷 Türkçe</button>
+                <button onclick="changeLanguage('br')">🇧🇷 Português</button>
+                <button onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button onclick="changeLanguage('nl')">🇳🇱 Nederlands</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+        <h1 id="title">Win Lock</h1>
+        <p id="description">WIN LOCK IS THE BEST ARABIC SERVER FOR BLUE LOCK RIVALS MAP , WE MAKE CHAMPIONS AND LEAGUES ,YOU CAN MAKE YOUR TEAM , AND MAKE ALOTOF FREINDS THERE JOIN US</p>
+        <button onclick="joinDiscord()" id="joinButton">انضم لنا</button>
+    </div>
+
+    <script>
+        // JavaScript for smooth button click and additional effects
+        function joinDiscord() {
+            // Add a smooth fade-out effect before redirecting
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+
+            setTimeout(() => {
+                window.location.href = "https://discord.gg/D8RasDfnTN";
+            }, 500); // Wait for the fade-out to complete
+        }
+
+        // Function to toggle language dropdown
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Function to change language
+        function changeLanguage(lang) {
+            const title = document.getElementById('title');
+            const description = document.getElementById('description');
+            const joinButton = document.getElementById('joinButton');
+
+            if (lang === 'en') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK IS THE BEST ARABIC SERVER FOR BLUE LOCK RIVALS MAP , WE MAKE CHAMPIONS AND LEAGUES ,YOU CAN MAKE YOUR TEAM , AND MAKE ALOTOF FREINDS THERE JOIN US";
+                joinButton.innerText = "Join Us";
+            } else if (lang === 'ar') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK هو أفضل سيرفر عربي لخريطة Blue Lock Rivals، نصنع الأبطال والدوريات، يمكنك إنشاء فريقك، وتكوين الكثير من الأصدقاء هناك، انضم إلينا";
+                joinButton.innerText = "انضم لنا";
+            } else if (lang === 'tr') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK, Blue Lock Rivals haritası için en iyi Arap sunucusudur, şampiyonlar ve ligler yaparız, takımınızı kurabilir ve orada birçok arkadaş edinebilirsiniz, bize katılın";
+                joinButton.innerText = "Bize Katıl";
+            } else if (lang === 'br') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK é o melhor servidor árabe para o mapa Blue Lock Rivals, fazemos campeões e ligas, você pode montar sua equipe e fazer muitos amigos lá, junte-se a nós";
+                joinButton.innerText = "Junte-se a nós";
+            } else if (lang === 'fr') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK est le meilleur serveur arabe pour la carte Blue Lock Rivals, nous faisons des champions et des ligues, vous pouvez créer votre équipe et vous faire beaucoup d'amis là-bas, rejoignez-nous";
+                joinButton.innerText = "Rejoignez-nous";
+            } else if (lang === 'nl') {
+                title.innerText = "Win Lock";
+                description.innerText = "WIN LOCK is de beste Arabische server voor de Blue Lock Rivals-kaart, we maken kampioenen en competities, je kunt je team maken en veel vrienden maken daar, doe mee";
+                joinButton.innerText = "Doe mee";
+            }
+        }
+    </script>
+</body>
+</html>
