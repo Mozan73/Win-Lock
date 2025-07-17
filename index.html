@@ -1,310 +1,590 @@
 <!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Win Lock</title>
+    <title>Wick Studio</title>
     <style>
-        /* Reset default styles */
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
-
-        /* Body styling with moving background effect */
+        
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
+            background-color: #0f43f0;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: url('https://media.discordapp.net/attachments/1345751141945835568/1360577006198194276/BANNER.jpg?ex=67fe4294&is=67fcf114&hm=a3f11c626fb829c176d4a48471eb149d06dfde00f09204d8a9743cdba8dacd9e&=&format=webp&width=1056&height=594');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+        
+        .header {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(2, 151, 238, 0.8);
+            letter-spacing: 2px;
+        }
+        
+        .profile-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('https://i.pinimg.com/736x/42/b6/14/42b614691ce578ab427e3c12e692713b.jpg');
-            background-size: cover;
-            background-position: center;
-            font-family: 'Tajawal', sans-serif; /* خط عربي فخم */
-            color: white;
-            text-align: center;
-            overflow: hidden;
-            animation: moveBackground 40s linear infinite; /* سرعة أبطأ */
-        }
-
-        /* Container for content */
-        .container {
-            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 2s ease-in-out;
-            max-width: 90%; /* Responsive width */
-            backdrop-filter: blur(10px); /* تأثير ضبابي فخم */
-        }
-
-        /* Title styling */
-        h1 {
-            font-size: 3.5rem; /* حجم كبير للعنوان */
-            margin-bottom: 20px;
-            animation: slideDown 1.5s ease-in-out;
-            font-family: 'Cairo', sans-serif; /* خط عربي أنيق */
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* ظل للنص */
+            margin: 40px 0;
             position: relative;
+            height: 300px;
         }
-
-        /* تأثير إضاءة على العنوان */
+        
+        .profile-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 25px rgba(2, 151, 238, 0.8),
+                0 0 50px rgba(2, 151, 238, 0.8);
+            animation: pulseGlow 4s infinite alternate;
+        }
+        
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 25px rgba(2, 151, 238, 0.8), 0 0 50px rgba(2, 151, 238, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 35px rgba(2, 151, 238, 0.8), 0 0 70px rgba(2, 151, 238, 0.8);
+            }
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(2, 151, 238, 0.8);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .orbit1 {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .orbit2 {
+            width: 400px;
+            height: 400px;
+            animation-direction: reverse;
+        }
+        
+        .orbit3 {
+            width: 500px;
+            height: 500px;
+        }
+        
+        .orbit-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #0091d4;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(2, 151, 238, 0.8);
+        }
+        
+        .orbit1 .orbit-particle:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .orbit1 .orbit-particle:nth-child(2) { top: 50%; right: 0; transform: translate(50%, -50%); }
+        .orbit1 .orbit-particle:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        .orbit1 .orbit-particle:nth-child(4) { top: 50%; left: 0; transform: translate(-50%, -50%); }
+        
+        .orbit2 .orbit-particle:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .orbit2 .orbit-particle:nth-child(2) { top: 50%; right: 0; transform: translate(50%, -50%); }
+        .orbit2 .orbit-particle:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        .orbit2 .orbit-particle:nth-child(4) { top: 50%; left: 0; transform: translate(-50%, -50%); }
+        
+        .orbit3 .orbit-particle:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .orbit3 .orbit-particle:nth-child(2) { top: 50%; right: 0; transform: translate(50%, -50%); }
+        .orbit3 .orbit-particle:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        .orbit3 .orbit-particle:nth-child(4) { top: 50%; left: 0; transform: translate(-50%, -50%); }
+        
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .content {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(110, 68, 255, 0.3);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(110, 68, 255, 0.8);
+            position: relative;
+            display: inline-block;
+        }
+        
         h1::after {
             content: '';
             position: absolute;
-            left: 0;
-            bottom: -10px;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #007BFF, #00BFFF);
-            animation: glow 2s infinite alternate;
+            bottom: -10px;
+            left: 0;
+            background: linear-gradient(90deg, transparent, #6e44ff, transparent);
         }
-
-        /* Button styling */
-        button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            color: white;
-            background: linear-gradient(45deg, #007BFF, #00BFFF); /* جرادينت أزرق */
-            border: none;
-            border-radius: 50px; /* حواف دائرية */
-            cursor: pointer;
-            transition: all 0.4s ease;
-            animation: pulse 2s infinite;
-            font-family: 'Tajawal', sans-serif; /* خط عربي */
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4); /* ظل للزر */
-            margin: 10px; /* مسافة بين الأزرار */
+        
+        p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #e2e2e2;
         }
-
-        /* Button hover effect */
-        button:hover {
-            transform: scale(1.1); /* تكبير الزر */
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6); /* ظل أكبر */
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        .feature {
+            background: linear-gradient(145deg, rgba(25, 25, 35, 0.7), rgba(15, 15, 25, 0.7));
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 250px;
+            text-align: center;
+            transition: all 0.5s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(110, 68, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
-
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(110, 68, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.5s;
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        
+        .feature:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
-
-        /* Moving background animation */
-        @keyframes moveBackground {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 50% 50%; } /* تقليل المسافة */
-            100% { background-position: 0% 0%; }
+        
+        .feature:hover::before {
+            opacity: 1;
         }
-
-        /* Glow effect for the title */
-        @keyframes glow {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
+        
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #6e44ff, #c258f8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
         }
-
-        /* Responsive design for smaller devices */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem; /* حجم أصغر للعنوان على الموبايل */
-            }
-
-            button {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-
-            .container {
-                padding: 20px;
-            }
-
-            /* تقليل سرعة تحريك الخلفية على الهواتف */
-            body {
-                animation: moveBackground 80s linear infinite; /* سرعة أبطأ */
-            }
-
-            @keyframes moveBackground {
-                0% { background-position: 0% 0%; }
-                50% { background-position: 20% 20%; } /* تقليل المسافة أكثر */
-                100% { background-position: 0% 0%; }
-            }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
         }
-
-        /* Navigation bar styling */
-        .navbar {
+        
+        .feature p {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            perspective: 1000px;
+        }
+        
+        .social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(30, 30, 40, 0.7), rgba(15, 15, 25, 0.7));
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+            font-size: 1.8rem;
+            transition: all 0.5s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            border: 1px solid rgba(110, 68, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(110, 68, 255, 0.3), transparent);
+            top: -100%;
+            left: -100%;
+            transition: all 0.5s;
+        }
+        
+        .social a:hover {
+            transform: translateY(-10px) rotateY(20deg) scale(1.1);
+            box-shadow: 0 15px 30px rgba(110, 68, 255, 0.4);
+        }
+        
+        .social a:hover::before {
+            top: 0;
+            left: 0;
+        }
+        
+        .instagram:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+        
+        .facebook:hover {
+            background: #3b5998;
+        }
+        
+        .tiktok:hover {
+            background: linear-gradient(90deg, #25F4EE, #FE2C55, #000000);
+        }
+        
+        .discord:hover {
+            background: #7289da;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: #999999;
+            font-size: 1rem;
+            background-color: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(110, 68, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: flex-end;
-            z-index: 1000;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
-
-        .navbar button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px; /* مسافة بين العلم والنص */
+        
+        .mouse-light {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(110, 68, 255, 0.4) 0%, rgba(110, 68, 255, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(20px);
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            mix-blend-mode: screen;
         }
-
-        .navbar button:hover {
-            color: #00BFFF;
-        }
-
-        /* Language dropdown styling */
-        .language-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .language-dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            right: 0;
-            border-radius: 10px; /* حواف مستديرة */
-            overflow: hidden; /* لإخفاء المحتوى الزائد */
-        }
-
-        .language-dropdown-content button {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px; /* مسافة بين العلم والنص */
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .language-dropdown-content button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .language-dropdown:hover .language-dropdown-content {
-            display: block;
-        }
-
-        /* تحسين شكل زر اللغة */
-        .language-dropdown button {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 8px 16px;
-            transition: background 0.3s ease;
-        }
-
-        .language-dropdown button:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-    </style>
-    <!-- روابط خطوط عربية من Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation bar -->
-    <div class="navbar">
-        <div class="language-dropdown">
-            <button onclick="toggleLanguageDropdown()">🌐 اللغة</button>
-            <div class="language-dropdown-content" id="languageDropdown">
-                <button onclick="changeLanguage('en')">🇺🇸 English</button>
-                <button onclick="changeLanguage('ar')">🇸🇦 العربية</button>
-                <button onclick="changeLanguage('tr')">🇹🇷 Türkçe</button>
-                <button onclick="changeLanguage('br')">🇧🇷 Português</button>
-                <button onclick="changeLanguage('fr')">🇫🇷 Français</button>
-                <button onclick="changeLanguage('nl')">🇳🇱 Nederlands</button>
-                <button onclick="changeLanguage('de')">🇩🇪 Deutsch</button> <!-- اللغة الألمانية -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Main content -->
-    <div class="container">
-        <h1 id="title">Win Lock</h1>
-        <p id="description">WIN LOCK IS THE BEST ARABIC SERVER FOR BLUE LOCK RIVALS MAP , WE MAKE CHAMPIONS AND LEAGUES ,YOU CAN MAKE YOUR TEAM , AND MAKE ALOTOF FREINDS THERE JOIN US</p>
-        <button onclick="joinDiscord()" id="joinButton">انضم لنا</button>
-    </div>
-
-    <script>
-        // JavaScript for smooth button click and additional effects
-        function joinDiscord() {
-            // Add a smooth fade-out effect before redirecting
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-
-            setTimeout(() => {
-                window.location.href = "https://discord.gg/D8RasDfnTN";
-            }, 500); // Wait for the fade-out to complete
-        }
-
-        // Function to toggle language dropdown
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('languageDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Function to change language
-        function changeLanguage(lang) {
-            const title = document.getElementById('title');
-            const description = document.getElementById('description');
-            const joinButton = document.getElementById('joinButton');
-
-            if (lang === 'en') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK IS THE BEST ARABIC SERVER FOR BLUE LOCK RIVALS MAP , WE MAKE CHAMPIONS AND LEAGUES ,YOU CAN MAKE YOUR TEAM , AND MAKE ALOTOF FREINDS THERE JOIN US";
-                joinButton.innerText = "Join Us";
-            } else if (lang === 'ar') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK هو أفضل سيرفر عربي لخريطة Blue Lock Rivals، نصنع الأبطال والدوريات، يمكنك إنشاء فريقك، وتكوين الكثير من الأصدقاء هناك، انضم إلينا";
-                joinButton.innerText = "انضم لنا";
-            } else if (lang === 'tr') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK, Blue Lock Rivals haritası için en iyi Arap sunucusudur, şampiyonlar ve ligler yaparız, takımınızı kurabilir ve orada birçok arkadaş edinebilirsiniz, bize katılın";
-                joinButton.innerText = "Bize Katıl";
-            } else if (lang === 'br') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK é o melhor servidor árabe para o mapa Blue Lock Rivals, fazemos campeões e ligas, você pode montar sua equipe e fazer muitos amigos lá, junte-se a nós";
-                joinButton.innerText = "Junte-se a nós";
-            } else if (lang === 'fr') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK est le meilleur serveur arabe pour la carte Blue Lock Rivals, nous faisons des champions et des ligues, vous pouvez créer votre équipe et vous faire beaucoup d'amis là-bas, rejoignez-nous";
-                joinButton.innerText = "Rejoignez-nous";
-            } else if (lang === 'nl') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK is de beste Arabische server voor de Blue Lock Rivals-kaart, we maken kampioenen en competities, je kunt je team maken en veel vrienden maken daar, doe mee";
-                joinButton.innerText = "Doe mee";
-            } else if (lang === 'de') {
-                title.innerText = "Win Lock";
-                description.innerText = "WIN LOCK ist der beste arabische Server für die Blue Lock Rivals-Karte, wir machen Champions und Ligen, Sie können Ihr Team erstellen und viele Freunde finden, treten Sie uns bei";
-                joinButton.innerText = "Treten Sie uns bei";
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
             }
         }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #6e44ff, #c258f8);
+            border-radius: 30px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(110, 68, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(110, 68, 255, 0.6);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin: 60px 0 30px;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(110, 68, 255, 0.6);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Win Lock Community </div>
+    </div>
+    
+    <div class="profile-container">
+        <div class="profile-circle floating-animation">
+            <img src="http://cdn.discordapp.com/attachments/1384491667607912558/1395340164058054676/web.jpg?ex=687a174b&is=6878c5cb&hm=a997d448c16b868d6fa79b090778d1f7dced5e4a81ad8b76a3c8b984ff260259&" alt="صورتك الشخصية" class="profile-img">
+        </div>
+        
+        <div class="orbit orbit1">
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+        </div>
+        
+        <div class="orbit orbit2">
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+        </div>
+        
+        <div class="orbit orbit3">
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+            <div class="orbit-particle"></div>
+        </div>
+    </div>
+    
+    <main class="content">
+        <h1>Win Lock</h1>
+        <p>مرحباً بك في عالمانا الإبداعي و الممتع . نقدم بطولات و جوائز و فعاليات ونمتلك اداريين  و فرق ممتازة .</p>
+        
+        <a href="https://discord.gg/YHaaYWnRMd" class="btn"> انضم معنا <i class="fab fa-discord"></i></a>
+        
+        <h2 class="section-title">خدامتنا</h2>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fa-solid fa-gamepad"></i>
+                <h3> بطولات علي كافة الألعاب </h3>
+                <p> ننظم العديد من البطولات وعلي مكافأت و قريبا علي روبوكس </p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-camera"></i>
+                <h3> رولات و بثوث  </h3>
+                <p> حيث اننا نبث كل مبارة تقام و نمتلك رولات مميزة كثيرة   </p>
+            </div>
+            
+            <div class="feature">
+                <i class="fa-solid fa-face-smile"></i>
+                <h3> التفاعل  </h3>
+                <p>  نمتلك تفاعل رهيب و نظام متقن </p>
+            </div>
+            
+           
+        
+        
+      
+    </main>
+    
+    <footer>
+        جميع الحقوق محفوظة &copy; 2025 Win Lock Community
+    </footer>
+    
+    <div class="particles" id="particles"></div>
+    <div class="mouse-light"></div>
+    
+    <script>
+        // إنشاء تأثير الجسيمات
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = 'rgba(110, 68, 255, ' + (Math.random() * 0.5) + ')';
+                particle.style.borderRadius = '50%';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.boxShadow = '0 0 10px rgba(110, 68, 255, 0.8)';
+                
+                // حركة الجسيمات
+                const duration = Math.random() * 50 + 30;
+                particle.style.animation = `float ${duration}s ease-in-out infinite`;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+        
+        // تأثير الإضاءة المتحركة مع الماوس
+        document.addEventListener('mousemove', function(e) {
+            const mouseLight = document.querySelector('.mouse-light');
+            mouseLight.style.left = (e.clientX - 150) + 'px';
+            mouseLight.style.top = (e.clientY - 150) + 'px';
+        });
+        
+        // ظهور العناصر عند التمرير
+        const observeElements = function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.feature, .section-title, .social a').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+            
+            // تعريف كلاس show
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .show {
+                    opacity: 1 !important;
+                    transform: translateY(0) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        };
+        
+        // تشغيل المراقبة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', observeElements);
+        
+        // تأثير الدوران للمدارات والجسيمات
+        const orbitAnimation = function() {
+            const orbits = document.querySelectorAll('.orbit');
+            orbits.forEach((orbit, index) => {
+                const direction = index % 2 === 0 ? 1 : -1;
+                const duration = 20 + (index * 10);
+                orbit.style.animation = `rotate ${duration}s linear infinite ${direction === 1 ? '' : 'reverse'}`;
+            });
+        };
+        
+        document.addEventListener('DOMContentLoaded', orbitAnimation);
+        
+        // تأثير التحليق للدائرة الرئيسية
+        const floatingAnimation = function() {
+            const profileCircle = document.querySelector('.profile-circle');
+            profileCircle.classList.add('floating-animation');
+        };
+        
+        document.addEventListener('DOMContentLoaded', floatingAnimation);
     </script>
+</body>
+</html>
+<!-- partial -->
+  
 </body>
 </html>
